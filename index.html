@@ -1,572 +1,97 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ILOVEU</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salma Gallery</title>
 
-  <!-- خط Tajawal -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  body{
+    background:#ffe4e6;
+    font-family:'Cairo', sans-serif;
+    margin:0;
+    padding:20px;
+    text-align:center;
+  }
 
-  <style>
-    :root{
-      --bg1: #0b1020;
-      --bg2: #15162a;
-      --accent: #ff6fa3;
-      --soft: rgba(255,111,163,0.12);
-      --glass: rgba(255,255,255,0.04);
-      --text: #f8f7fb;
-      --muted: #c9c7d0;
-      --card-radius: 14px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-body{
-  margin:0;
-  font-family:'Tajawal',system-ui,Segoe UI,Arial;
-  background: radial-gradient(ellipse at 20% 10%, rgba(255,255,255,0.02) 0%, transparent 10%),
-              radial-gradient(ellipse at 80% 80%, rgba(255,255,255,0.02) 0%, transparent 8%),
-              linear-gradient(180deg,var(--bg1),var(--bg2));
-  color:var(--text);
-  overflow:auto;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  display:flex;
-  align-items:flex-start; /* يبدأ من الأعلى */
-  justify-content:center;
-  padding:24px;
-  min-height:100vh; /* يسمح بالتمدد حسب الشاشة */
-}
+  .gallery{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+  }
 
-.app {
-  width: 100%;
-  max-width: 960px;
-  height: auto; /* السماح للصندوق بالتمدد */
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(3,6,20,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
-  position: relative;
-  overflow: visible;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 20px; /* مسافة من الأعلى */
-}
+  .photo img{
+    width:100%;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+  }
 
-    /* starry dots */
-    .stars{
-      position:absolute;
-      inset:0;
-      background-image:
-        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.04) 0 1px, transparent 1px),
-        radial-gradient(circle at 30% 40%, rgba(255,255,255,0.03) 0 1px, transparent 1px),
-        radial-gradient(circle at 70% 30%, rgba(255,255,255,0.03) 0 1px, transparent 1px),
-        radial-gradient(circle at 90% 70%, rgba(255,255,255,0.02) 0 1px, transparent 1px);
-      opacity:0.6;
-      pointer-events:none;
-      mix-blend-mode:screen;
-    }
-
-    /* pages: use relative/stacked layout so scroll works naturally */
-    .page{
-      width:100%;
-      /* allow page height to grow */
-      min-height:420px;
-      display:block;
-      padding:28px 0;
-      transition: opacity 280ms ease, transform 400ms cubic-bezier(.2,.9,.2,1);
-    }
-    .hidden { opacity:0; pointer-events:none; height:0; transform:translateY(12px) scale(0.998); display:none; }
-
-    .card{
-      width:100%;
-      max-width:760px;
-      margin:0 auto;
-      border-radius:var(--card-radius);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:28px;
-      box-shadow: 0 8px 24px rgba(2,6,20,0.55);
-      border:1px solid rgba(255,255,255,0.025);
-      position:relative;
-      backdrop-filter: blur(6px) saturate(120%);
-    }
-
-    h1{
-      margin:0 0 10px 0;
-      font-weight:600;
-      font-size:28px;
-      color:var(--text);
-      text-align:right;
-    }
-    p.lead{
-      margin:0 0 18px 0;
-      color:var(--muted);
-      line-height:1.6;
-      text-align:right;
-      font-size:15px;
-    }
-
-    /* Input */
-    .input-row{display:flex; gap:12px; align-items:center; justify-content:flex-end; margin-top:8px;}
-    input[type="password"]{
-      direction:ltr;
-      min-width:200px;
-      padding:12px 16px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.05);
-      background:transparent;
-      color:var(--text);
-      outline:none;
-      font-size:16px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.01);
-    }
-
-    button{
-      background: linear-gradient(90deg,var(--accent), #ff88b8);
-      border: none;
-      color: white;
-      padding:10px 18px;
-      font-weight:600;
-      border-radius:12px;
-      cursor:pointer;
-      box-shadow: 0 6px 18px rgba(255,111,163,0.15);
-      transition: transform 160ms ease, box-shadow 160ms;
-    }
-    button:hover{ transform:translateY(-3px); box-shadow: 0 10px 28px rgba(255,111,163,0.18); }
-    button.ghost{
-      background:transparent;
-      border:1px solid rgba(255,255,255,0.06);
-      color:var(--text);
-    }
-
-    /* wrong shake */
-    .shake {
-      animation: shake 560ms cubic-bezier(.36,.07,.19,.97);
-    }
-    @keyframes shake {
-      10%,90%{ transform: translateX(-1px) }
-      20%,80%{ transform: translateX(2px) }
-      30%,50%,70%{ transform: translateX(-4px) }
-      40%,60%{ transform: translateX(4px) }
-    }
-
-    /* Page 2 message styling */
-    .message-box{
-      padding:24px;
-      border-radius:12px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,111,163,0.04));
-      border:1px solid rgba(255,111,163,0.06);
-      box-shadow: 0 8px 30px rgba(17,9,34,0.4);
-      text-align:right;
-    }
-    .message-box p{ margin:0 0 14px 0; font-size:18px; line-height:1.8; color:var(--text); }
-
-    /* gallery page */
-    .gallery{
-      display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-      gap:16px;
-      margin-top:12px;
-    }
-    .photo{
-      background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));
-      border-radius:12px;
-      padding:8px;
-      border:1px solid rgba(255,255,255,0.03);
-      display:flex;
-      align-items:center; justify-content:center;
-      min-height:140px;
-      overflow:hidden;
-    }
-    .photo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      border-radius:10px;
-      transform: scale(1);
-      transition: transform 400ms;
-    }
-    .photo:hover img{ transform: scale(1.06); }
-
-    /* bottom romantic footer */
-    .footer-note{
-      margin-top:14px;
-      color:var(--muted);
-      font-size:13px;
-      text-align:right;
-    }
-
-    /* hearts container: allow hearts to float above pages */
-    .hearts-layer{
-      pointer-events:none;
-      position:absolute;
-      inset:0;
-      overflow:visible; /* allow rise beyond container */
-      z-index:60; /* high so hearts appear above card */
-    }
-    .heart{
-      position:absolute;
-      bottom:-30px;
-      font-size:22px;
-      opacity:0;
-      transform-origin:center;
-      user-select:none;
-      will-change: transform, opacity;
-      filter: drop-shadow(0 6px 12px rgba(255,111,163,0.12));
-      text-shadow: 0 2px 4px rgba(0,0,0,0.35);
-      line-height:1;
-      pointer-events:none;
-      white-space:nowrap;
-    }
-
-    /*
-      keyframes for hearts:
-      - use CSS variable --drift for horizontal drift amount
-      - use transform with translateX(var(--drift)) at the end
-    */
-    @keyframes rise {
-      0%{
-        transform: translateY(0) translateX(0) scale(0.9) rotate(0deg);
-        opacity:0;
-        filter: blur(0px);
-      }
-      6%{
-        opacity:1;
-        filter: blur(0px);
-      }
-      60%{
-        opacity:0.95;
-      }
-      100%{
-        transform: translateY(-120vh) translateX(var(--drift)) scale(1.25) rotate(20deg);
-        opacity:0;
-        filter: blur(0.8px);
-      }
-    }
-
-    /* subtle decorative moon */
-    .moon{
-      position:absolute;
-      top:18px;
-      left:24px;
-      width:84px;
-      height:84px;
-      border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.14), rgba(255,255,255,0.02) 40%), rgba(255,255,255,0.02);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.6), inset -6px -6px 24px rgba(0,0,0,0.18);
-      opacity:0.9;
-      mix-blend-mode:screen;
-      z-index:2;
-    }
-
-    /* responsive */
-    @media (max-width:640px){
-      .app{ padding:20px; }
-      h1{ font-size:22px }
-      input[type="password"]{ min-width:140px }
-    }
-
-  </style>
+  .caption{
+    font-size:18px;
+    font-weight:600;
+    margin-top:8px;
+    color:#b6426a;
+  }
+</style>
 </head>
+
 <body>
 
-  <div class="app" role="application" aria-label="تطبيق رومانسي">
-    <div class="stars" aria-hidden="true"></div>
-    <div class="moon" aria-hidden="true"></div>
+<h1>ذكرياتنا 💖</h1>
 
-    <!-- hearts layer -->
-    <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
+<div class="gallery">
 
-    <!-- Page 1: password -->
-    <section id="page1" class="page">
-      <div class="card" role="region" aria-labelledby="p1title">
-        <h1 id="p1title">أنا آسف يا نور عيني</h1>
-        <p class="lead"></p>
-
-        <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
-          <div style="flex:1 1 320px;">
-            <div class="input-row" style="justify-content:flex-end;">
-              <label for="pwd" style="display:block;color:var(--muted);margin-bottom:8px">كلمة السر</label>
-              <input id="pwd" type="password" placeholder="••••••" aria-label="كلمة السر" />
-            </div>
-          </div>
-
-          <div style="display:flex;gap:12px;align-items:center;">
-            <button id="enterBtn" aria-label="دخول">دخول</button>
-            <button id="hintBtn" class="ghost" aria-label="عرض تلميح">تلميح</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Page 2: message + continue -->
-    <section id="page2" class="page hidden">
-      <div class="card" role="region" aria-labelledby="p2title">
-        <h1 id="p2title">رسالة</h1>
-
-        <div class="message-box" role="article">
-          <!-- رومانسي نصي -->
-<p>
-انا اسف ي حبيبه قلبي ربنا يخليكي ليا و ما يحرمني منك يارب و تفضلي معايا بنتي و حبيبتي و امي و مراتي و صاحبتي و اختي و كل حاجه ليا يارب عارف اني جيت عليكي كتير بس و الله بحبك اوي ونا اسف تاني و حقك عليا ي توتي و الله انا ابنك ي بت و مقدرش استغني عنك ابدا عارف انك استحملتي كتير اوي عشاني و زهقي و قرفي كتير بس حقك عليا استحمليني و النبي انا ماليش غيرك
-</p>
-</div>        <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:18px;">
-          <button id="continueBtn" aria-label="استمرار">استمرار</button>
-        </div>
-
-        <p class="footer-note">دوسي استمرار.</p>
-      </div>
-    </section>
-
-    <!-- Page 3: gallery -->
-    <section id="page3" class="page hidden" aria-live="polite">
-      <div class="card" role="region" aria-labelledby="p3title">
-        <h1 id="p3title">....</h1>
-        <p class="lead"></p>
-
-       <div class="gallery" role="list">
-
-  <div class="photo" role="listitem">
-    <img src="1.jpeg" alt="img" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>الاغنيه اللي بنحبها 💖</p>
+  <div class="photo">
+    <img src="1.jpeg" alt="img">
+    <div class="caption">الاغنيه اللي بنحبها 💖</div>
   </div>
 
-  <div class="photo" role="listitem">
-    <img src="كريم٧٧.jpeg" alt="كريم 2" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>تاني مره اشوفك ي حياتي كنتي ما شاء الله بتحلوي كل ث💖</p>
+  <div class="photo">
+    <img src="كريم٧٧.jpeg" alt="كريم 2">
+    <div class="caption">تاني مره اشوفك ي حياتي كنتي ما شاء الله بتحلوي كل ث💖</div>
   </div>
 
-  <div class="photo" role="listitem">
-    <img src="كريم٨.jpeg" alt="كريم 3" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>اول مره تشاركيني حاجه ف حياتي و اول مره حد يشاركني اصلا و فعلا شكرا انك كنتي اول حد يعمل معايا كدا💖</p>
+  <div class="photo">
+    <img src="كريم٨.jpeg" alt="كريم 3">
+    <div class="caption">اول مره تشاركيني حاجه ف حياتي و اول مره حد يشاركني اصلا و فعلا شكرا انك كنتي اول حد يعمل معايا كدا💖</div>
   </div>
 
-  <div class="photo" role="listitem">
-    <img src="كريم٢٢.jpeg" alt="كريم 4" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>اول مره ادوقه ف حياتي و كان علي ايدك💖</p>
+  <div class="photo">
+    <img src="كريم٢٢.jpeg" alt="كريم 4">
+    <div class="caption">اول مره ادوقه ف حياتي و كان علي ايدك💖</div>
   </div>
 
-  <div class="photo" role="listitem">
-    <img src="كربم٦.png" alt="كريم 5" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>اللحظه اللي بستناها ف اليوم عشان تفرحني و تشيل عني هموم اليوم💖</p>
+  <div class="photo">
+    <img src="كربم٦.png" alt="كريم 5">
+    <div class="caption">اللحظه اللي بستناها ف اليوم عشان تفرحني و تشيل عني هموم اليوم💖</div>
   </div>
 
-  <div class="photo" role="listitem">
-    <img src="كريم٥٥.jpeg" alt="كريم 6" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>بفرح بالكلام دا اوي بشوفك شيفاني و حاسه بيا و فعلا بتحبيني 💖</p>
+  <div class="photo">
+    <img src="كريم٥٥.jpeg" alt="كريم 6">
+    <div class="caption">بفرح بالكلام دا اوي بشوفك شيفاني و حاسه بيا و فعلا بتحبيني 💖</div>
   </div>
 
-  <div class="photo" role="listitem">
-    <img src="كريم٤.jpeg" alt="كريم 7" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>انتي بنتي حبيبت قلبي 💖</p>
+  <div class="photo">
+    <img src="كريم٤.jpeg" alt="كريم 7">
+    <div class="caption">انتي بنتي حبيبت قلبي 💖</div>
   </div>
 
-  <div class="photo" role="listitem">
-    <img src="كريم٧.jpeg" alt="كريم 8" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>اغلي صوره علي قلبي 💖</p>
+  <div class="photo">
+    <img src="كريم٧.jpeg" alt="كريم 8">
+    <div class="caption">اغلي صوره علي قلبي 💖</div>
   </div>
 
-  <div class="photo" role="listitem">
-    <img src="كريم٣.png" alt="كريم 9" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>نور عيني و هو غننه خالص خالص💖</p>
+  <div class="photo">
+    <img src="كريم٣.png" alt="كريم 9">
+    <div class="caption">نور عيني و هو غننه خالص خالص💖</div>
   </div>
 
-  <div class="photo" role="listitem">
-    <img src="كريم٣٣.jpeg" alt="كريم 10" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>سندي و اماني و بيتي الدفي💖</p>
+  <div class="photo">
+    <img src="كريم٣٣.jpeg" alt="كريم 10">
+    <div class="caption">سندي و اماني و بيتي الدفي💖</div>
   </div>
 
 </div>
-        </div>
-
-        <div style="display:flex;gap:12px;justify-content:space-between;margin-top:16px;align-items:center;flex-wrap:wrap">
-          <div class="footer-note">حاولت ابسطك لو ب حاجه بسيطه ربنا يحفظك ليا يارب .</div>
-          <div style="display:flex;gap:8px">
-            <button id="backToMsg" class="ghost">عودة للرسالة</button>
-            <button id="restartBtn">إعادة من البداية</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-<script>
-  (function(){
-    // عناصر DOM
-    const page1 = document.getElementById('page1');
-    const page2 = document.getElementById('page2');
-    const page3 = document.getElementById('page3');
-    const pwdInput = document.getElementById('pwd');
-    const enterBtn = document.getElementById('enterBtn');
-    const hintBtn = document.getElementById('hintBtn');
-    const continueBtn = document.getElementById('continueBtn');
-    const backToMsg = document.getElementById('backToMsg');
-    const restartBtn = document.getElementById('restartBtn');
-    const heartsLayer = document.getElementById('heartsLayer');
-
-    // عرّف المتغير قبل أي استعمال (يحمي من ReferenceError)
-    let heartsInterval = null;
-
-    // كلمة السر المطلوبة
-    const SECRET = '19/10';
-
-    // دوال مساعدة
-    function rand(min, max){ return Math.random() * (max - min) + min; }
-
-    /**
-     * spawnHeart(options)
-     * options.origin: 'bottom-center' | 'random'
-     */
-    function spawnHeart(options = { origin: 'bottom-center' }) {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.innerText = '❤';
-
-      const size = Math.round(rand(14,48));
-      heart.style.fontSize = size + 'px';
-
-      const hue = Math.round(rand(320,350));
-      const sat = Math.round(rand(80,100));
-      const light = Math.round(rand(60,78));
-      heart.style.color = `hsl(${hue} ${sat}% ${light}% / ${rand(0.88,1)})`;
-
-      if(options.origin === 'bottom-center') {
-        const offset = rand(-22,22);
-        heart.style.left = `calc(50% + ${offset}%)`;
-      } else {
-        heart.style.left = (rand(6,94)) + '%';
-      }
-
-      heart.style.bottom = (rand(-36, -8)) + 'px';
-      const drift = Math.round(rand(-120,120)) + 'px';
-      heart.style.setProperty('--drift', drift);
-
-      const dur = Math.round(rand(4200, 11000));
-      const delay = Math.round(rand(0, 700));
-      heart.style.animation = `rise ${dur}ms linear ${delay}ms forwards`;
-      heart.style.transform = `translateY(0) rotate(${rand(-18,18)}deg)`;
-      heart.style.zIndex = Math.floor(rand(50,120));
-
-      heartsLayer.appendChild(heart);
-
-      // cleanup
-      setTimeout(()=> {
-        if(heart && heart.parentNode) heart.remove();
-      }, dur + delay + 240);
-    }
-
-    function startHearts(){
-      if(heartsInterval) return;
-      // burst
-      for(let i=0;i<10;i++){
-        setTimeout(()=> spawnHeart({ origin: 'bottom-center' }), i*90);
-      }
-
-      // steady stream
-      heartsInterval = setInterval(()=> {
-        const mainCount = Math.random() < 0.85 ? 1 : 2;
-        for(let i=0;i<mainCount;i++){
-          spawnHeart({ origin: 'bottom-center' });
-        }
-        if(Math.random() < 0.35){
-          spawnHeart({ origin: 'random' });
-        }
-      }, 420);
-    }
-
-    function stopHearts(){
-      if(heartsInterval){ clearInterval(heartsInterval); heartsInterval = null; }
-      setTimeout(()=> { heartsLayer.innerHTML = ''; }, 380);
-    }
-
-    // مساعدة: عرض تلميح قصير
-    hintBtn.addEventListener('click', ()=>{
-      hintBtn.textContent = 'تلميح: تاريخ مميز';
-      setTimeout(()=> hintBtn.textContent = 'تلميح', 2200);
-    });
-
-    // التحقق من كلمة السر
-    function checkPassword(){
-      const val = pwdInput.value.trim();
-      if(val === SECRET){
-        showPage(2);
-        pwdInput.value = '';
-      } else {
-        const card = page1.querySelector('.card');
-        card.classList.remove('shake');
-        void card.offsetWidth;
-        card.classList.add('shake');
-      }
-    }
-
-    enterBtn.addEventListener('click', checkPassword);
-    pwdInput.addEventListener('keydown', (e)=>{
-      if(e.key === 'Enter') checkPassword();
-    });
-
-    continueBtn.addEventListener('click', ()=> showPage(3));
-    backToMsg.addEventListener('click', ()=> showPage(2));
-    restartBtn.addEventListener('click', ()=> showPage(1));
-
-    // دالة إظهار صفحة رقم (1,2,3)
-    function showPage(n){
-      // hide all
-      page1.classList.add('hidden');
-      page2.classList.add('hidden');
-      page3.classList.add('hidden');
-
-      if(n === 1) { page1.classList.remove('hidden'); }
-      if(n === 2) { page2.classList.remove('hidden'); }
-      if(n === 3) { page3.classList.remove('hidden'); }
-
-      // hearts
-      if(n === 2 || n === 3) startHearts();
-      else stopHearts();
-
-      // scroll to top of the app container for better UX on small screens
-      // use requestAnimationFrame to ensure layout update completed
-      requestAnimationFrame(()=>{
-        const appRect = document.querySelector('.app').getBoundingClientRect();
-        // scroll the page so app top is visible
-        window.scrollTo({ top: Math.max(0, window.scrollY + appRect.top - 16), behavior: 'smooth' });
-      });
-    }
-
-    // بداية: إظهار الصفحة الأولى
-    showPage(1);
-
-    // ambient slow hearts so background never empty
-    (function ambientHearts(){
-      for(let i=0;i<5;i++){
-        setTimeout(()=> spawnHeart({ origin: 'random' }), i*900);
-      }
-      setInterval(()=> {
-        if(Math.random() < 0.65) spawnHeart({ origin: 'random' });
-      }, 4800);
-    })();
-
-    // Accessibility: focus input on load
-    window.addEventListener('load', ()=> {
-      setTimeout(()=> {
-        try { pwdInput.focus(); } catch(e){}
-      }, 300);
-    });
-
-  })();
-</script>
 
 </body>
 </html>
