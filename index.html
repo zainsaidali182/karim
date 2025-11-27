@@ -326,69 +326,36 @@ body{
         <h1 id="p3title">....</h1>
         <p class="lead"></p>
 
-       <div class="gallery" role="list">
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 20px;
+}
 
-  <div class="photo" role="listitem">
-    <img src="1.jpeg" alt="img" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>الاغنيه اللي بنحبها 💖</p>
-  </div>
+.photo {
+  background: #fff;
+  padding: 15px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  text-align: center;
+  animation: fadeIn 0.7s ease;
+}
 
-  <div class="photo" role="listitem">
-    <img src="كريم٧٧.jpeg" alt="كريم 2" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>تاني مره اشوفك ي حياتي كنتي ما شاء الله بتحلوي كل ث💖</p>
-  </div>
+.photo img {
+  width: 100%;
+  border-radius: 14px;
+  margin-bottom: 10px;
+}
 
-  <div class="photo" role="listitem">
-    <img src="كريم٨.jpeg" alt="كريم 3" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>اول مره تشاركيني حاجه ف حياتي و اول مره حد يشاركني اصلا و فعلا شكرا انك كنتي اول حد يعمل معايا كدا💖</p>
-  </div>
+.photo p {
+  font-size: 17px;
+  color: #b6426a;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.6;
+}
 
-  <div class="photo" role="listitem">
-    <img src="كريم٢٢.jpeg" alt="كريم 4" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>اول مره ادوقه ف حياتي و كان علي ايدك💖</p>
-  </div>
-
-  <div class="photo" role="listitem">
-    <img src="كربم٦.png" alt="كريم 5" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>اللحظه اللي بستناها ف اليوم عشان تفرحني و تشيل عني هموم اليوم💖</p>
-  </div>
-
-  <div class="photo" role="listitem">
-    <img src="كريم٥٥.jpeg" alt="كريم 6" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>بفرح بالكلام دا اوي بشوفك شيفاني و حاسه بيا و فعلا بتحبيني 💖</p>
-  </div>
-
-  <div class="photo" role="listitem">
-    <img src="كريم٤.jpeg" alt="كريم 7" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>انتي بنتي حبيبت قلبي 💖</p>
-  </div>
-
-  <div class="photo" role="listitem">
-    <img src="كريم٧.jpeg" alt="كريم 8" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>اغلي صوره علي قلبي 💖</p>
-  </div>
-
-  <div class="photo" role="listitem">
-    <img src="كريم٣.png" alt="كريم 9" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>نور عيني و هو غننه خالص خالص💖</p>
-  </div>
-
-  <div class="photo" role="listitem">
-    <img src="كريم٣٣.jpeg" alt="كريم 10" loading="lazy"
-         onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
-    <p>سندي و اماني و بيتي الدفي💖</p>
-  </div>
-
-</div>
         </div>
 
         <div style="display:flex;gap:12px;justify-content:space-between;margin-top:16px;align-items:center;flex-wrap:wrap">
