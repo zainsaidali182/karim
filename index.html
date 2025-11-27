@@ -1,184 +1,60 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>موقع سلمي - نسخة موبايل</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Cairo', sans-serif;
-      background-color: #ffe4e6;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      position: relative;
-      padding: 10px;
-    }
+ <div class="gallery" role="list">
+          <div class="photo" role="listitem">
+            <img src="1.jpeg" alt="img" loading="lazy" onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
+          </div>
 
-    /* صفحة كلمة السر */
-    #password-page {
-      background-color: #ffd6df;
-      padding: 30px;
-      border-radius: 20px;
-      width: 100%;
-      max-width: 360px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    #password-page h2 {
-      margin-bottom: 15px;
-      font-size: 20px;
-      color: #333;
-    }
-    .input-box {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #d46a8c;
-      border-radius: 12px;
-      font-size: 16px;
-      margin-bottom: 15px;
-      outline: none;
-    }
-    #enter-btn {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      background-color: #b6426a;
-      color: #fff;
-      font-size: 18px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    #enter-btn:hover {
-      background-color: #8c2f52;
-    }
+<div class="photo" role="listitem">
+  <img src="كريم٧٧.jpeg" alt="كريم 2" loading="lazy" onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
+</div>
 
-    /* الإيموجي */
-    #emoji {
-      position: absolute;
-      font-size: 50px;
-      opacity: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+<div class="photo" role="listitem">
+  <img src="كريم٨.jpeg" alt="كريم 3" loading="lazy" onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
+</div>
 
-    /* الصفحات */
-    #main-content, #second-page {
-      display: none;
-      background-color: #ffffff;
-      padding: 25px;
-      border-radius: 20px;
-      max-width: 360px;
-      width: 100%;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      text-align: center;
-      animation: fadeIn 0.8s ease;
-      overflow-y: auto;
-      max-height: 90vh;
-    }
+<div class="photo" role="listitem">
+  <img src="كريم٢٢.jpeg" alt="كريم 4" loading="lazy" onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
+</div>
 
-    #start-journey {
-      margin-top: 20px;
-      padding: 12px;
-      background-color: #b6426a;
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      font-size: 18px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    #start-journey:hover {
-      background-color: #8c2f52;
-    }
+<div class="photo" role="listitem">
+  <img src="كربم٦.png" alt="كريم 5" loading="lazy" onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
+</div>
 
-    /* محتوى الصفحة الجديدة */
-    #second-page img, #second-page video {
-      width: 100%;
-      border-radius: 15px;
-      margin-bottom: 15px;
-    }
-    #second-page p { font-size: 16px; line-height: 1.6; color: #333; margin-bottom: 15px; }
+<div class="photo" role="listitem">
+  <img src="كريم٥٥.jpeg" alt="كريم 6" loading="lazy" onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
+</div>
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body>
+<div class="photo" role="listitem">
+  <img src="كريم٤.jpeg" alt="كريم 7" loading="lazy" onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
+</div>
 
-  <div id="password-page">
-    <h2>انا اسف يا نور عيني</h2>
-    <input id="password" type="password" class="input-box" placeholder="ادخل كلمة السر" />
-    <button id="enter-btn">دخول</button>
-  </div>
+<div class="photo" role="listitem">
+  <img src="كريم٧.jpeg" alt="كريم 8" loading="lazy" onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
+</div>
 
-  <div id="emoji">💖</div>
+<div class="photo" role="listitem">
+  <img src="كريم٣.png" alt="كريم 9" loading="lazy" onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
+</div>
 
-  <div id="main-content">
-    <h1>انا اسف يا نور عيني ✨</h1>
-    <p>انا اسف ي حبيبه قلبي ربنا يخليكي ليا و ما يحرمني منك يارب و تفضلي معايا بنتي و حبيبتي و امي و مراتي و صاحبتي و اختي و كل حاجه ليا يارب عارف اني جيت عليكي كتير بس و الله بحبك اوي ونا اسف تاني و حقك عليا ي توتي و الله انا ابنك ي بت و مقدرش استغني عنك ابدا عارف انك استحملتي كتير اوي عشاني و زهقي و قرفي كتير بس حقك عليا استحمليني و النبي انا ماليش غيرك </p>
-    <button id="start-journey">✨ start journey ✨</button>
-  </div>
+<div class="photo" role="listitem">
+  <img src="كريم٣٣.jpeg" alt="كريم 10" loading="lazy" onerror="this.style.opacity=0.6; this.alt='الصورة غير متوفرة'">
+</div>
+اكتب النصوص اللي هبعتها دي بعد كل صوره وارسل الكود بعد التعديل 
+الاغنيه اللي بنحبها 💖
 
-  <div id="second-page">
-    <h1>مرحبا بك في الرحلة الجديدة!</h1>
-    <p>دي الصفحة الثانية، ممكن تحط هنا أي محتوى تحبه.</p>
-    <!-- أمثلة على صور -->
-    <img src="path_to_image1.jpg" alt="صورة 1" />
-    <img src="path_to_image2.jpg" alt="صورة 2" />
-    <!-- مثال فيديو -->
-    <video controls>
-      <source src="path_to_video.mp4" type="video/mp4" />
-      متصفحك لا يدعم الفيديو.
-    </video>
-    <p>ممكن تضيف أي نصوص إضافية هنا تحت الصور والفيديو.</p>
-  </div>
+تاني مره اشوفك ي حياتي كنتي ما شاء الله بتحلوي كل ث💖
 
-  <audio id="bg-music" src="path_to_your_song.mp3" loop></audio>
+اول مره تشاركيني حاجه ف حياتي و اول مره حد يشاركني اصلا و فعلا شكرا انك كنتي اول حد يعمل معايا كدا💖
 
-  <script>
-    const btn = document.getElementById("enter-btn");
-    const passInput = document.getElementById("password");
-    const emoji = document.getElementById("emoji");
-    const passPage = document.getElementById("password-page");
-    const mainPage = document.getElementById("main-content");
-    const secondPage = document.getElementById("second-page");
-    const music = document.getElementById("bg-music");
-    const startJourney = document.getElementById("start-journey");
+اول مره ادوقه ف حياتي و كان علي ايدك💖
 
-    btn.onclick = () => {
-      if (passInput.value === "19/10") {
-        emoji.style.opacity = 1;
-        const anim = emoji.animate([
-          { transform: "translate(-50%, 40px)", opacity: 1 },
-          { transform: "translate(-50%, -150px)", opacity: 0 }
-        ], { duration: 900, easing: "ease-out" });
+اللحظه اللي بستناها ف اليوم عشان تفرحني و تشيل عني هموم اليوم💖
 
-        anim.onfinish = () => {
-          emoji.style.opacity = 0;
-          passPage.style.display = "none";
-          mainPage.style.display = "block";
-          music.volume = 0.15;
-          music.play();
-        };
+بفرح بالكلام دا اوي بشوفك شيفاني و حاسه بيا و فعلا بتحبيني 💖
 
-      } else {
-        passInput.style.borderColor = "red";
-      }
-    };
+انتي بنتي حبيبت قلبي 💖
 
-    startJourney.onclick = () => {
-      mainPage.style.display = "none";
-      secondPage.style.display = "block";
-    };
-  </script>
+اغلي صوره علي قلبي 💖
 
-</body>
-</html>
+نور عيني و هو غننه خالص خالص💖
+
+سندي و اماني و بيتي الدفي💖
